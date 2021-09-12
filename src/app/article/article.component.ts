@@ -7,8 +7,8 @@ import { Article } from '../home/home.component';
   styleUrls: ['./article.component.css']
 })
 export class ArticleComponent implements OnInit {
-  @Input() article!: Article;
-  @Output() like = new EventEmitter<Article>();
+  @Input('data') article!: Article;
+  @Output('onClick') like = new EventEmitter<Article>();
 
   constructor() { }
 
