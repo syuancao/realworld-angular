@@ -24,7 +24,7 @@
           
           <ng-container *ngIf="data.length>0; else nodata"> 
             <!-- *ngFor="let x of data -->
-            <app-article [article]="x" *ngFor="let x of data"></app-article>
+            <app-article [article]="x" (like)="like($event)" *ngFor="let x of data"></app-article>
           </ng-container>
           <ng-template #nodata>
               No Data

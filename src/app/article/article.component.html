@@ -5,7 +5,8 @@
         <a href="" class="author">{{ article.author }}</a>
         <span class="date">{{ article.publishDate | date: 'MMMM dd' }}</span>
       </div>
-      <button class="btn btn-outline-primary btn-sm pull-xs-right" >
+      <button class="btn btn-outline-primary btn-sm pull-xs-right" (click)
+          ="likeAction(article)">
         <i class="ion-heart"></i> {{ article.likes }}
       </button>
     </div>

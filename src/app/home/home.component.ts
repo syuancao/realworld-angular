@@ -31,6 +31,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  like(article: Article) {
+    article.likes += 1
+  }
 }
 
 export interface Article {

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Article } from '../home/home.component';
 
 @Component({
@@ -8,9 +8,14 @@ import { Article } from '../home/home.component';
 })
 export class ArticleComponent implements OnInit {
   @Input() article!: Article;
+  @Output() like = new EventEmitter<Article>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  likeAction(article: Article) {
+    this.like.emit(article)
+  }
 }
