@@ -3,7 +3,7 @@
       <a href="profile.html"><img [src]="article.author.image" /></a>
       <div class="info">
         <a href="" class="author">{{ article.author.username }}</a>
-        <span class="date">{{ article.updatedAt | date: 'MMMM dd' }}</span>
+        <span class="date">{{ article.updatedAt | date: 'yyyy MMMM dd' }}</span>
       </div>
       <button class="btn btn-outline-primary btn-sm pull-xs-right" (click)
           ="likeAction(article)">

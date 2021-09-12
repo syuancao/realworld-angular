@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import {  Articles, Article } from './models/article.model';
+import { ApiService } from '../api.service';
+import { Article } from './models/article.model';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -9,21 +10,25 @@ import {  Articles, Article } from './models/article.model';
 })
 
 export class HomeComponent implements OnInit {
-  data: Article[] = []
-  basicUrl = 'https://conduit.productionready.io/'
+  // data: Article[] = []
+  data$ = this.service.loadData().pipe(map(result => result.articles))
 
-  constructor(private http: HttpClient) {
-    this.loadData()  
+  // basicUrl = 'https://conduit.productionready.io/'
+
+  constructor(private service: ApiService) {
+    // this.loadData()
   }
 
-  loadData() {
-    this.http.get<Articles>(`${this.basicUrl}/api/articles`).subscribe({
-      next: result => {
-        console.log(result)
-        this.data = result.articles
-      }
-    })
-  }
+  // loadData() {
+  //   this.service
+  //     .loadData()
+  //     .pipe(map(result => result.articles))
+  //     .subscribe({
+  //       next: articles => {
+  //         this.data = articles
+  //       }
+  //     })
+  // }
 
   ngOnInit(): void {
   }
@@ -33,4 +38,3 @@ export class HomeComponent implements OnInit {
   }
 }
 
- 

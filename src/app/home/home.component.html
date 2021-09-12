@@ -6,10 +6,10 @@
         <p>A place to share your knowledge.</p>
       </div>
     </div>
-  
+
     <div class="container page">
       <div class="row">
-  
+
         <div class="col-md-9">
           <div class="feed-toggle">
             <ul class="nav nav-pills outline-active">
@@ -21,21 +21,21 @@
               </li>
             </ul>
           </div>
-          
-          <ng-container *ngIf="data.length>0; else nodata"> 
+
+          <ng-container *ngIf="(data$ | async)!.length>0; else nodata">
             <!-- *ngFor="let x of data -->
-            <app-article [data]="x" (onClick)="like($event)" *ngFor="let x of data"></app-article>
+            <app-article [data]="x" (onClick)="like($event)" *ngFor="let x of data$ | async"></app-article>
           </ng-container>
           <ng-template #nodata>
               No Data
           </ng-template>
 
         </div>
-  
+
         <div class="col-md-3">
           <div class="sidebar">
             <p>Popular Tags</p>
-  
+
             <div class="tag-list">
               <a href="" class="tag-pill tag-default">programming</a>
               <a href="" class="tag-pill tag-default">javascript</a>
@@ -48,7 +48,7 @@
             </div>
           </div>
         </div>
-  
+
       </div>
     </div>
 

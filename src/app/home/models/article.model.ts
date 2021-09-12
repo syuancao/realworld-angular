@@ -7,8 +7,8 @@ export interface Article {
   title: string;
   slug: string;
   body: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: string | Date;
+  updatedAt: string | Date;
   tagList: string[];
   description: string;
   author: Author;
