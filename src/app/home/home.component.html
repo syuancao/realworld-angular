@@ -22,9 +22,9 @@
             </ul>
           </div>
 
-          <ng-container *ngIf="(data$ | async)!.length>0; else nodata">
+          <ng-container *ngIf="(data$ | async) as data; else nodata">
             <!-- *ngFor="let x of data -->
-            <app-article [data]="x" (onClick)="like($event)" *ngFor="let x of data$ | async"></app-article>
+            <app-article [data]="x" (onClick)="like($event)" *ngFor="let x of data"></app-article>
           </ng-container>
           <ng-template #nodata>
               No Data

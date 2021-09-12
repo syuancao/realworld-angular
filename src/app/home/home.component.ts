@@ -10,13 +10,9 @@ import { map } from 'rxjs/operators';
 })
 
 export class HomeComponent implements OnInit {
-  // data: Article[] = []
   data$ = this.service.loadData().pipe(map(result => result.articles))
 
-  // basicUrl = 'https://conduit.productionready.io/'
-
   constructor(private service: ApiService) {
-    // this.loadData()
   }
 
   // loadData() {
@@ -31,6 +27,12 @@ export class HomeComponent implements OnInit {
   // }
 
   ngOnInit(): void {
+    // const observer = {
+    //   next: v => {},
+    //   error: err => {},
+    //   complete: () => {}
+    // }
+    // this.service.loadData().subscribe(observer)
   }
 
   like(article: Article) {
