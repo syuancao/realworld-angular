@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { ArticleComponent } from './article/article.component';
 import { HttpClientModule } from '@angular/common/http'
 import { ApiService } from './api.service';
+import { PaginatorComponent } from './paginator/paginator.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ApiService } from './api.service';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    ArticleComponent
+    ArticleComponent,
+    PaginatorComponent
   ],
   imports: [
     BrowserModule,

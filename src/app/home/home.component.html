@@ -29,6 +29,7 @@
           <ng-template #nodata>
               No Data
           </ng-template>
+          <app-paginator [totalCount]="totalCount$ | async"></app-paginator>
 
         </div>
 
