@@ -21,7 +21,7 @@
               </li>
             </ul>
           </div>
-
+          <app-paginator [totalCount]="totalCount$ | async" (pageChange)="pageChange($event)"></app-paginator>
           <ng-container *ngIf="(data$ | async) as data; else nodata">
             <!-- *ngFor="let x of data -->
             <app-article [data]="x" (onClick)="like($event)" *ngFor="let x of data"></app-article>
@@ -29,7 +29,6 @@
           <ng-template #nodata>
               No Data
           </ng-template>
-          <app-paginator [totalCount]="totalCount$ | async"></app-paginator>
 
         </div>
 

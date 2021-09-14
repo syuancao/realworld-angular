@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-paginator',
@@ -8,7 +8,9 @@ import {Component, OnInit, Input, OnChanges, SimpleChanges} from '@angular/core'
 export class PaginatorComponent implements OnInit, OnChanges {
   @Input() totalCount: number | null = 0;
   @Input() pageSize = 20
+  @Output() pageChange = new EventEmitter<number>()
 
+  pages: any = []
   constructor() { }
 
   ngOnInit(): void {
@@ -16,5 +18,14 @@ export class PaginatorComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes:SimpleChanges) {
     console.log(changes)
+    this.totalCount = changes['totalCount'].currentValue
+
+    if(this.totalCount) {
+      this.pages = new Array(Math.ceil(this.totalCount / this.pageSize))
+    }
+  }
+
+  setPage(idx: number) {
+    this.pageChange.emit(idx)
   }
 }

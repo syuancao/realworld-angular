@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Article } from './models/article.model';
-import {map, shareReplay} from 'rxjs/operators';
+import {map, shareReplay, switchMap} from 'rxjs/operators';
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-home',
@@ -10,34 +11,29 @@ import {map, shareReplay} from 'rxjs/operators';
 })
 
 export class HomeComponent implements OnInit {
-  source$ = this.service.loadData().pipe(shareReplay())
-  data$ = this.service.loadData().pipe(map(result => result.articles))
-  totalCount$ = this.service.loadData().pipe(map(result => result.articlesCount))
+  page$ = new BehaviorSubject(0)
+  source$ = this.page$.pipe(
+    switchMap(offset => this.service.loadData({offset})),
+    shareReplay()
+  )
+
+  data$ = this.source$.pipe(map(result => result.articles))
+  totalCount$ = this.service
+    .loadData({offset: 20})
+    .pipe(map(result => result.articlesCount))
+
   constructor(private service: ApiService) {
   }
 
-  // loadData() {
-  //   this.service
-  //     .loadData()
-  //     .pipe(map(result => result.articles))
-  //     .subscribe({
-  //       next: articles => {
-  //         this.data = articles
-  //       }
-  //     })
-  // }
-
   ngOnInit(): void {
-    // const observer = {
-    //   next: v => {},
-    //   error: err => {},
-    //   complete: () => {}
-    // }
-    // this.service.loadData().subscribe(observer)
   }
 
   like(article: Article) {
     article.favoritesCount += 1
+  }
+
+  pageChange(idx: number) {
+    this.page$.next(idx * 20)
   }
 }
 
