@@ -1,4 +1,5 @@
 import {Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-paginator',
@@ -8,7 +9,8 @@ import {Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter
 export class PaginatorComponent implements OnInit, OnChanges {
   @Input() totalCount: number | null = 0;
   @Input() pageSize = 20
-  @Output() pageChange = new EventEmitter<number>()
+
+  page$ = new BehaviorSubject(0)
 
   pages: any = []
   constructor() { }
@@ -17,7 +19,6 @@ export class PaginatorComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes:SimpleChanges) {
-    console.log(changes)
     this.totalCount = changes['totalCount'].currentValue
 
     if(this.totalCount) {
@@ -26,6 +27,6 @@ export class PaginatorComponent implements OnInit, OnChanges {
   }
 
   setPage(idx: number) {
-    this.pageChange.emit(idx)
+    this.page$.next(idx * this.pageSize)
   }
 }
